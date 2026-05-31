@@ -1,0 +1,139 @@
+.hot-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.hot-card__header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8fafc;
+}
+
+.hot-card__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.hot-card__meta {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  font-size: 0.8125rem;
+  color: #6b7280;
+}
+
+.hot-card__updated {
+  color: #9ca3af;
+}
+
+.hot-card__list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+}
+
+.hot-row {
+  display: grid;
+  grid-template-columns: 2rem 1fr auto;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+  padding: 0.55rem 1.25rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.hot-row:last-child {
+  border-bottom: none;
+}
+
+.hot-row__rank {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+.hot-row--rank-1 .hot-row__rank,
+.hot-row--rank-2 .hot-row__rank,
+.hot-row--rank-3 .hot-row__rank {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.hot-row--rank-1 .hot-row__rank {
+  color: #dc2626;
+}
+
+.hot-row--rank-2 .hot-row__rank {
+  color: #ea580c;
+}
+
+.hot-row--rank-3 .hot-row__rank {
+  color: #d97706;
+}
+
+.hot-row__main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.hot-row__title {
+  color: #1d4ed8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.hot-row__title:hover {
+  text-decoration: underline;
+}
+
+.hot-row__metric {
+  font-size: 0.8125rem;
+  color: #dc2626;
+  font-weight: 500;
+}
+
+.hot-row__bull {
+  font-size: 0.75rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.hot-row__bull-link {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  color: #7c3aed;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.hot-row__bull-link:hover {
+  color: #5b21b6;
+}
+
+@media (max-width: 640px) {
+  .hot-row {
+    grid-template-columns: 1.75rem 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .hot-row__bull {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

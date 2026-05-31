@@ -1,0 +1,61 @@
+{
+  "platforms": [
+    {
+      "source": "eastmoney",
+      "sourceName": "东方财富",
+      "listType": "stock",
+      "listTypeName": "热门股票",
+      "updatedAt": "2026-05-31T08:00:00.000Z",
+      "items": [
+        { "rank": 1, "title": "宁德时代", "code": "300750", "change": "+5.82%", "url": "https://quote.eastmoney.com/sz300750.html", "bullName": "葛卫东" },
+        { "rank": 2, "title": "比亚迪", "code": "002594", "change": "+4.15%", "url": "https://quote.eastmoney.com/sz002594.html" },
+        { "rank": 3, "title": "中际旭创", "code": "300308", "change": "+8.33%", "url": "https://quote.eastmoney.com/sz300308.html", "bullName": "章建平" },
+        { "rank": 4, "title": "工业富联", "code": "601138", "change": "+3.21%", "url": "https://quote.eastmoney.com/sh601138.html" },
+        { "rank": 5, "title": "寒武纪", "code": "688256", "change": "+6.07%", "url": "https://quote.eastmoney.com/sh688256.html", "bullName": "赵老哥" },
+        { "rank": 6, "title": "贵州茅台", "code": "600519", "change": "+1.24%", "url": "https://quote.eastmoney.com/sh600519.html" },
+        { "rank": 7, "title": "立讯精密", "code": "002475", "change": "+2.88%", "url": "https://quote.eastmoney.com/sz002475.html" },
+        { "rank": 8, "title": "东方财富", "code": "300059", "change": "+3.56%", "url": "https://quote.eastmoney.com/sz300059.html" },
+        { "rank": 9, "title": "紫金矿业", "code": "601899", "change": "+2.41%", "url": "https://quote.eastmoney.com/sh601899.html" },
+        { "rank": 10, "title": "科大讯飞", "code": "002230", "change": "+4.92%", "url": "https://quote.eastmoney.com/sz002230.html", "bullName": "徐翔" }
+      ]
+    },
+    {
+      "source": "10jqka",
+      "sourceName": "同花顺",
+      "listType": "stock",
+      "listTypeName": "热门股票",
+      "updatedAt": "2026-05-31T08:05:00.000Z",
+      "items": [
+        { "rank": 1, "title": "新易盛", "code": "300502", "change": "+9.12%", "heat": "热度 98", "url": "https://stockpage.10jqka.com.cn/300502/", "bullName": "陈小群" },
+        { "rank": 2, "title": "天孚通信", "code": "300394", "change": "+7.45%", "heat": "热度 95", "url": "https://stockpage.10jqka.com.cn/300394/" },
+        { "rank": 3, "title": "光模块概念", "code": "BK1056", "change": "+6.20%", "heat": "热度 92", "url": "https://q.10jqka.com.cn/gn/detail/code/BK1056/" },
+        { "rank": 4, "title": "浪潮信息", "code": "000977", "change": "+4.88%", "heat": "热度 88", "url": "https://stockpage.10jqka.com.cn/000977/", "bullName": "方新侠" },
+        { "rank": 5, "title": "中科曙光", "code": "603019", "change": "+3.76%", "heat": "热度 85", "url": "https://stockpage.10jqka.com.cn/603019/" },
+        { "rank": 6, "title": "拓维信息", "code": "002261", "change": "+5.11%", "heat": "热度 82", "url": "https://stockpage.10jqka.com.cn/002261/" },
+        { "rank": 7, "title": "剑桥科技", "code": "603083", "change": "+8.02%", "heat": "热度 80", "url": "https://stockpage.10jqka.com.cn/603083/", "bullName": "作手新一" },
+        { "rank": 8, "title": "沪电股份", "code": "002463", "change": "+2.95%", "heat": "热度 77", "url": "https://stockpage.10jqka.com.cn/002463/" },
+        { "rank": 9, "title": "胜宏科技", "code": "300476", "change": "+4.33%", "heat": "热度 74", "url": "https://stockpage.10jqka.com.cn/300476/" },
+        { "rank": 10, "title": "景旺电子", "code": "603228", "change": "+3.18%", "heat": "热度 71", "url": "https://stockpage.10jqka.com.cn/603228/" }
+      ]
+    },
+    {
+      "source": "tetewang",
+      "sourceName": "特特网",
+      "listType": "stock",
+      "listTypeName": "热门股票",
+      "updatedAt": "2026-05-31T08:10:00.000Z",
+      "items": [
+        { "rank": 1, "title": "万丰奥威", "code": "002085", "change": "+10.01%", "url": "https://www.tetewang.com/stock/002085", "bullName": "林园" },
+        { "rank": 2, "title": "低空经济", "code": "BK0987", "change": "+7.88%", "heat": "题材热度 96", "url": "https://www.tetewang.com/theme/BK0987" },
+        { "rank": 3, "title": "宗申动力", "code": "001696", "change": "+6.54%", "url": "https://www.tetewang.com/stock/001696", "bullName": "但斌" },
+        { "rank": 4, "title": "中信海直", "code": "000099", "change": "+5.32%", "url": "https://www.tetewang.com/stock/000099" },
+        { "rank": 5, "title": "商汤科技", "code": "00020", "change": "+4.67%", "url": "https://www.tetewang.com/stock/00020" },
+        { "rank": 6, "title": "海康威视", "code": "002415", "change": "+2.19%", "url": "https://www.tetewang.com/stock/002415", "bullName": "冯柳" },
+        { "rank": 7, "title": "药明康德", "code": "603259", "change": "+1.85%", "url": "https://www.tetewang.com/stock/603259" },
+        { "rank": 8, "title": "隆基绿能", "code": "601012", "change": "+3.44%", "url": "https://www.tetewang.com/stock/601012" },
+        { "rank": 9, "title": "特变电工", "code": "600089", "change": "+2.76%", "url": "https://www.tetewang.com/stock/600089", "bullName": "张坤" },
+        { "rank": 10, "title": "中国中免", "code": "601888", "change": "+1.92%", "url": "https://www.tetewang.com/stock/601888" }
+      ]
+    }
+  ]
+}
