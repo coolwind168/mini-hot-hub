@@ -69,6 +69,24 @@ npm install -g npm-run-all
 npm-run-all -p "npm run dev --prefix server" "npm run dev --prefix client"
 ```
 
+### 方式三：从根目录一键启动（推荐）
+
+```bash
+npm run dev
+```
+
+这将使用 `concurrently` 同时启动前端和后端服务。
+
+**可用命令**：
+
+| 命令 | 说明 |
+|------|------|
+| `npm run dev` | 同时启动前后端 |
+| `npm run dev:client` | 仅启动前端 |
+| `npm run dev:server` | 仅启动后端 |
+| `npm run build` | 构建前端 |
+| `npm run install:all` | 安装所有依赖 |
+
 ## 项目结构
 
 ```
@@ -84,8 +102,11 @@ mini-hot-hub/
 │   └── vite.config.ts   # Vite 配置
 ├── server/              # 后端服务
 │   └── src/
+│       ├── services/    # 数据服务（东方财富、同花顺、特特网）
+│       ├── utils/       # 工具函数（缓存）
 │       └── index.ts     # Express 服务器入口
-└── TECH_DESIGN.md       # 技术设计文档
+├── doc/                 # 文档
+└── README.md
 ```
 
 ## 接口文档
@@ -167,6 +188,33 @@ CACHE_TTL=300 npm run dev
 2. 缓存期内请求 → 直接返回缓存数据（日志显示 `[cache hit]`）
 3. 缓存过期 → 重新抓取源站 → 更新缓存
 4. 强制刷新 → 跳过缓存，直接抓取最新数据
+
+### 开发环境模拟失败开关
+
+为方便测试前端 error 状态展示，后端支持以下环境变量开关：
+
+| 环境变量 | 平台 | 作用 |
+|----------|------|------|
+| `MOCK_FAIL_DONGFANGCAIFU=1` | 东方财富 | 模拟服务失败 |
+| `MOCK_FAIL_TONGHUASHUN=1` | 同花顺 | 模拟服务失败 |
+| `MOCK_FAIL_TETEWANG=1` | 特特网 | 模拟服务失败 |
+
+**使用示例**：
+
+```bash
+# 模拟东方财富服务失败
+MOCK_FAIL_DONGFANGCAIFU=1 npm run dev
+
+# 模拟多个平台失败
+MOCK_FAIL_DONGFANGCAIFU=1 MOCK_FAIL_TONGHUASHUN=1 npm run dev
+```
+
+**测试流程**：
+
+1. 设置环境变量启动后端
+2. 前端页面会显示对应平台的 error 卡片
+3. 可测试「点击重试」功能
+4. 关闭环境变量重启即可恢复正常
 
 ### 学习项目免责声明
 
@@ -266,26 +314,162 @@ taskkill /F /PID <PID>
 3. **确认 mock 数据格式正确**:
    - 检查 `client/mock/hot.json` 格式是否符合 `HotMockData` 类型定义
 
-## 生产环境部署
+---
 
-### 构建前端
+## 部署
+
+### 开发环境快速启动
+
+从项目根目录一键启动前后端：
 
 ```bash
-cd client
+npm run dev
+```
+
+这将使用 `concurrently` 同时启动前端和后端服务。
+
+**可用命令**：
+
+| 命令 | 说明 |
+|------|------|
+| `npm run dev` | 同时启动前后端 |
+| `npm run dev:client` | 仅启动前端 |
+| `npm run dev:server` | 仅启动后端 |
+| `npm run build` | 构建前端 |
+| `npm run install:all` | 安装所有依赖 |
+
+---
+
+### 生产环境部署
+
+#### 1. 前端部署（推荐 Vercel）
+
+**特点**：
+- 零配置自动化部署
+- 默认 HTTPS + 全球 CDN
+- 与 GitHub 深度集成，提交代码自动部署
+
+**部署步骤**：
+
+1. 将代码推送到 GitHub 仓库
+2. 登录 [Vercel](https://vercel.com)
+3. 点击 "Import Project"，选择 GitHub 仓库
+4. Vercel 会自动检测 Next.js/Vite 项目
+5. 配置环境变量（如需要）：
+   - `VITE_API_BASE`: 后端 API 地址（如 `https://your-backend.railway.app`）
+6. 点击 Deploy
+
+**构建命令**：
+```bash
 npm run build
 ```
 
-### 设置环境变量
+**输出目录**：`client/dist`
 
-前端使用 `VITE_API_BASE` 环境变量指定后端地址：
+---
+
+#### 2. 后端部署（推荐 Railway）
+
+**特点**：
+- 支持常驻服务，无 Serverless 超时限制
+- 自动 HTTPS + 公网域名
+- 支持环境变量配置
+
+**部署步骤**：
+
+**方式一：使用 Railway CLI（推荐）**
 
 ```bash
-# Linux/macOS
-export VITE_API_BASE=https://your-backend-domain.com
+# 安装 Railway CLI
+npm install -g @railway/cli
 
-# Windows PowerShell
-$env:VITE_API_BASE="https://your-backend-domain.com"
+# 登录
+railway login
+
+# 进入 server 目录
+cd server
+
+# 初始化项目（如果尚未初始化）
+railway init
+
+# 部署到 Railway
+railway up
 ```
+
+**方式二：直接在 Railway Dashboard 操作**
+
+1. 登录 [Railway](https://railway.app)
+2. 点击 "New Project" → "Deploy from GitHub repo"
+3. 选择仓库后，点击 "Configure" → "Root Directory"
+4. 设置为 `/server`
+5. Railway 会自动检测 Node.js 项目并部署
+
+**环境变量配置**：
+
+在 Railway Dashboard → Settings → Variables 中配置：
+
+| 变量名 | 默认值 | 说明 |
+|--------|--------|------|
+| `CACHE_TTL` | 600 | 缓存过期时间（秒） |
+| `PORT` | 3001 | 服务端口（由 Railway 自动设置） |
+
+**后端端口配置**：
+
+Railway 会自动设置 `PORT` 环境变量，代码中需正确读取：
+
+```typescript
+const PORT = parseInt(process.env.PORT || '3001', 10)
+```
+
+**验证部署**：
+
+```bash
+# 查看 Railway 提供的公网地址
+railway domain
+
+# 或在浏览器中访问 Railway 提供的域名
+```
+
+---
+
+#### 3. 部署检查清单
+
+- [ ] 前端构建成功（`npm run build`）
+- [ ] 后端依赖安装完成（`cd server && npm install`）
+- [ ] 环境变量配置正确
+- [ ] 端口无冲突
+- [ ] CORS 配置允许生产域名
+- [ ] API 地址配置正确
+- [ ] 测试环境验证通过
+
+详细检查项请参考 [doc/checklist.md](doc/checklist.md)
+
+---
+
+#### 4. 常见问题
+
+**Q: Railway 提示找不到 package.json**
+
+A: 确保在 `server/` 目录执行 `railway up`，或配置 Railway 工作目录。
+
+**Q: 前端无法请求后端 API**
+
+A: 检查以下配置：
+1. 后端 CORS 是否允许前端域名
+2. 前端 `VITE_API_BASE` 是否指向正确的后端地址
+3. 确认 Railway 提供的域名可访问
+
+**Q: 数据不更新**
+
+A:
+- 检查缓存 TTL 设置（默认 600 秒）
+- 添加 `?refresh=1` 参数强制刷新
+- 查看后端日志确认缓存命中情况
+
+详细文档请参考：
+- [doc/checklist.md](doc/checklist.md) - 部署前检查表
+- [doc/experience.md](doc/experience.md) - 开发经验总结
+- [doc/railway-deploy.md](doc/railway-deploy.md) - Railway 详细部署指南
 
 ## 许可证
 

@@ -1,5 +1,5 @@
 import type { HotItem, HotPlatform } from '../types/hot'
-import { formatUpdatedAt } from '../utils/formatUpdated'
+import { formatRelativeTime } from '../utils/format'
 import './HotCard.css'
 
 export interface HotCardData {
@@ -156,7 +156,7 @@ export function HotCard({
 
       <footer className="hot-card__footer">
         {hasData
-          ? `更新于 ${formatUpdatedAt(data.updatedAt)}`
+          ? `更新于 ${formatRelativeTime(data.updatedAt)}`
           : loading
             ? '数据加载中'
             : '—'}

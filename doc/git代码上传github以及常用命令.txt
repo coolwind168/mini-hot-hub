@@ -1,0 +1,26 @@
+
+Git身份验证文档
+https://docs.github.com/zh/authentication
+
+git使用密钥认证
+1，生成ssh密钥对
+ssh-keygen
+2，配置github公钥
+登录github后台，在用户设置中，'SSH and GPG keys'>'New SSH key',填入公钥。
+3，测试正常（注意这里要关掉代理）
+ssh -T git@github.com
+
+git关联本地仓库，以及添加文件，上传等
+git init
+git add .
+git add README.md
+git commit -m 'first commit'
+git branch -M main
+本地仓库关联远程github仓库命令（mini-hot-hub 这个名称随便取）
+git remote add mini-hot-hub git@github.com:coolwind168/mini-hot-hub.git
+
+git push mini-hot-hub master
+git pusll mini-hot-hub master
+
+git status
+

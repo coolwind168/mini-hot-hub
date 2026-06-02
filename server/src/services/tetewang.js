@@ -29,6 +29,11 @@ const BULL_NAMES = ['林园', '但斌', '冯柳', '张坤', '葛卫东', '陈小
 
 export async function fetchTetewangHot() {
   try {
+    // 开发环境模拟失败开关
+    if (process.env.MOCK_FAIL_TETEWANG === '1') {
+      throw new Error('模拟特特网服务失败')
+    }
+
     // 模拟一些动态变化
     const shuffled = [...MOCK_STOCKS].sort(() => Math.random() - 0.5)
     const items = shuffled.slice(0, 10).map((item, index) => {

@@ -22,6 +22,11 @@ const HEADERS = {
 
 export async function fetchTonghuashunHot() {
   try {
+    // 开发环境模拟失败开关
+    if (process.env.MOCK_FAIL_TONGHUASHUN === '1') {
+      throw new Error('模拟同花顺服务失败')
+    }
+
     const response = await fetch(API_URL, { headers: HEADERS })
 
     if (!response.ok) {
