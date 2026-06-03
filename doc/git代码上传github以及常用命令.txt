@@ -14,13 +14,13 @@ git关联本地仓库，以及添加文件，上传等
 git init
 git add .
 git add README.md
-git commit -m 'first commit'
+git commit -m 'test over'
 git branch -M main
 本地仓库关联远程github仓库命令（mini-hot-hub 这个名称随便取）
 git remote add mini-hot-hub git@github.com:coolwind168/mini-hot-hub.git
 
 git push mini-hot-hub master
-git pusll mini-hot-hub master
+git pull mini-hot-hub master
 
 git status
 
