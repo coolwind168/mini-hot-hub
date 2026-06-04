@@ -11,7 +11,25 @@ const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:5173'
 
 const app = express()
 
-app.use(cors({ origin: CLIENT_ORIGIN }))
+// 支持多个域名的 CORS 配置
+const allowedOrigins = [
+  CLIENT_ORIGIN,
+  'http://localhost:5173',
+  'https://mini-hot-hub-lac.vercel.app',
+  'https://mini-hot-hub-g2f-wiaoma168-84465-projects.vercel.app',
+  'https://mini-hot-ql708qx5m-xiaoyumao168-4448s-projects.vercel.app',
+]
+
+app.use(cors({ 
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  credentials: true
+}))
 app.use(express.json())
 
 app.use((req, _res, next) => {
