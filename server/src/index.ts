@@ -7,7 +7,7 @@ import { fetchTonghuashunHot } from './services/tonghuashun.js'
 import { fetchTetewangHot } from './services/tetewang.js'
 
 const PORT = parseInt(process.env.PORT || '3001', 10)
-const CLIENT_ORIGIN = 'http://localhost:5173'
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || 'http://localhost:5173'
 
 const app = express()
 
@@ -17,6 +17,20 @@ app.use(express.json())
 app.use((req, _res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`)
   next()
+})
+
+app.get('/', (_req, res) => {
+  res.json({ 
+    message: 'Mini Hot Hub API Server',
+    version: '1.0.0',
+    endpoints: [
+      '/api/health',
+      '/api/hot',
+      '/api/hot/dongfangcaifu',
+      '/api/hot/tonghuashun',
+      '/api/hot/tetewang',
+    ]
+  })
 })
 
 app.get('/api/health', (_req, res) => {
