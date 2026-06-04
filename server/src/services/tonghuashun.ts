@@ -1,3 +1,5 @@
+import type { HotItem, PlatformHotResponse } from '../types/hot.js'
+
 /**
  * 同花顺热搜数据服务
  *
@@ -20,7 +22,20 @@ const HEADERS = {
   'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
 }
 
-export async function fetchTonghuashunHot() {
+interface TonghuashunStockItem {
+  code: string
+  name: string
+  rise_and_fall: number
+  market: number
+}
+
+interface TonghuashunResponse {
+  data?: {
+    stock_list?: TonghuashunStockItem[]
+  }
+}
+
+export async function fetchTonghuashunHot(): Promise<PlatformHotResponse> {
   try {
     // 开发环境模拟失败开关
     if (process.env.MOCK_FAIL_TONGHUASHUN === '1') {
@@ -33,16 +48,16 @@ export async function fetchTonghuashunHot() {
       throw new Error(`HTTP error: ${response.status}`)
     }
 
-    const json = await response.json()
+    const json: TonghuashunResponse = await response.json()
     const list = json?.data?.stock_list || []
 
-    const items = list.slice(0, 10).map((item, index) => {
+    const items: HotItem[] = list.slice(0, 10).map((item, index) => {
       const riseAndFall = item.rise_and_fall || 0
       const changeStr = `${riseAndFall > 0 ? '+' : ''}${riseAndFall.toFixed(2)}%`
-      
+
       const code = item.code || ''
       const marketPrefix = item.market === 17 ? 'sh' : 'sz'
-      
+
       return {
         rank: index + 1,
         title: item.name || '',

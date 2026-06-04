@@ -1,12 +1,12 @@
 import cors from 'cors'
 import express from 'express'
-// @ts-expect-error 无法找到模块声明文件，该模块隐式拥有 any 类型
+import type { PlatformHotResponse } from './types/hot.js'
 import { getCache, setCache } from './utils/cache.js'
 import { fetchDongfangcaifuHot } from './services/dongfangcaifu.js'
 import { fetchTonghuashunHot } from './services/tonghuashun.js'
 import { fetchTetewangHot } from './services/tetewang.js'
 
-const PORT = 3001
+const PORT = parseInt(process.env.PORT || '3001', 10)
 const CLIENT_ORIGIN = 'http://localhost:5173'
 
 const app = express()
@@ -23,7 +23,7 @@ app.get('/api/health', (_req, res) => {
   res.json({ ok: true })
 })
 
-const DONG_FANG_CAI_FU_DATA = {
+const DONG_FANG_CAI_FU_DATA: PlatformHotResponse = {
   source: 'eastmoney',
   sourceName: '东方财富',
   listType: 'stock',
@@ -42,7 +42,7 @@ const DONG_FANG_CAI_FU_DATA = {
   ],
 }
 
-const TONG_HUA_SHUN_DATA = {
+const TONG_HUA_SHUN_DATA: PlatformHotResponse = {
   source: '10jqka',
   sourceName: '同花顺',
   listType: 'stock',
@@ -61,7 +61,7 @@ const TONG_HUA_SHUN_DATA = {
   ],
 }
 
-const TE_TE_WANG_DATA = {
+const TE_TE_WANG_DATA: PlatformHotResponse = {
   source: 'tetewang',
   sourceName: '特特网',
   listType: 'stock',
@@ -80,13 +80,13 @@ const TE_TE_WANG_DATA = {
   ],
 }
 
-const SOURCE_MAP: Record<string, typeof DONG_FANG_CAI_FU_DATA> = {
+const SOURCE_MAP: Record<string, PlatformHotResponse> = {
   dongfangcaifu: DONG_FANG_CAI_FU_DATA,
   tonghuashun: TONG_HUA_SHUN_DATA,
   tetewang: TE_TE_WANG_DATA,
 }
 
-async function fetchPlatformData(source: string) {
+async function fetchPlatformData(source: string): Promise<PlatformHotResponse> {
   if (source === 'dongfangcaifu') {
     return await fetchDongfangcaifuHot()
   }

@@ -1,3 +1,5 @@
+import type { HotItem, PlatformHotResponse } from '../types/hot.js'
+
 /**
  * 特特网牛散数据服务
  *
@@ -12,7 +14,14 @@
  *   bullName     → 牛散姓名（可选）
  */
 
-const MOCK_STOCKS = [
+interface MockStock {
+  title: string
+  code: string
+  change: number
+  bullName?: string
+}
+
+const MOCK_STOCKS: MockStock[] = [
   { title: '万丰奥威', code: '002085', change: 10.01, bullName: '林园' },
   { title: '宗申动力', code: '001696', change: 6.54, bullName: '但斌' },
   { title: '中信海直', code: '000099', change: 5.32 },
@@ -25,9 +34,9 @@ const MOCK_STOCKS = [
   { title: '宁德时代', code: '300750', change: 2.45, bullName: '葛卫东' },
 ]
 
-const BULL_NAMES = ['林园', '但斌', '冯柳', '张坤', '葛卫东', '陈小群', '方新侠', '作手新一']
+const BULL_NAMES: string[] = ['林园', '但斌', '冯柳', '张坤', '葛卫东', '陈小群', '方新侠', '作手新一']
 
-export async function fetchTetewangHot() {
+export async function fetchTetewangHot(): Promise<PlatformHotResponse> {
   try {
     // 开发环境模拟失败开关
     if (process.env.MOCK_FAIL_TETEWANG === '1') {
@@ -36,23 +45,23 @@ export async function fetchTetewangHot() {
 
     // 模拟一些动态变化
     const shuffled = [...MOCK_STOCKS].sort(() => Math.random() - 0.5)
-    const items = shuffled.slice(0, 10).map((item, index) => {
+    const items: HotItem[] = shuffled.slice(0, 10).map((item, index) => {
       const change = (item.change + (Math.random() - 0.5) * 2).toFixed(2)
       const changeStr = `${parseFloat(change) > 0 ? '+' : ''}${change}%`
-      
-      const result = {
+
+      const result: HotItem = {
         rank: index + 1,
         title: item.title,
         code: item.code,
         change: changeStr,
         url: `https://www.tetewang.com/stock/${item.code}`,
       }
-      
+
       // 随机添加牛散信息
       if (item.bullName || Math.random() > 0.6) {
         result.bullName = item.bullName || BULL_NAMES[Math.floor(Math.random() * BULL_NAMES.length)]
       }
-      
+
       return result
     })
 

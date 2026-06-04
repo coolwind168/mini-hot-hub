@@ -1,3 +1,5 @@
+import type { HotItem, PlatformHotResponse } from '../types/hot.js'
+
 /**
  * 东方财富热搜数据服务
  *
@@ -20,7 +22,19 @@ const HEADERS = {
   'Accept': 'application/json',
 }
 
-export async function fetchDongfangcaifuHot() {
+interface DongfangcaifuStockItem {
+  f12: string
+  f14: string
+  f3: number
+}
+
+interface DongfangcaifuResponse {
+  data?: {
+    diff?: DongfangcaifuStockItem[]
+  }
+}
+
+export async function fetchDongfangcaifuHot(): Promise<PlatformHotResponse> {
   try {
     // 开发环境模拟失败开关
     if (process.env.MOCK_FAIL_DONGFANGCAIFU === '1') {
@@ -33,10 +47,10 @@ export async function fetchDongfangcaifuHot() {
       throw new Error(`HTTP error: ${response.status}`)
     }
 
-    const json = await response.json()
+    const json: DongfangcaifuResponse = await response.json()
     const diff = json?.data?.diff || []
 
-    const items = diff.slice(0, 10).map((item, index) => ({
+    const items: HotItem[] = diff.slice(0, 10).map((item, index) => ({
       rank: index + 1,
       title: item.f14,
       code: item.f12,
