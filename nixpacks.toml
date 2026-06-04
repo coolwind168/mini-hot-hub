@@ -1,0 +1,13 @@
+# Nixpacks 配置 - 指定构建 server 目录
+# 文档: https://nixpacks.com/docs
+
+[phases.setup]
+
+[phases.install]
+cmds = ["cd server && npm install"]
+
+[phases.build]
+cmds = ["cd server && npm run build"]
+
+[start]
+cmd = "cd server && npm run start"
