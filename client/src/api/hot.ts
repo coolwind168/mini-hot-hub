@@ -1,6 +1,6 @@
 import type { PlatformHotResponse } from '../types/hot'
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? ''
+const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://localhost:3001'
 
 export async function fetchDongfangcaifu(): Promise<PlatformHotResponse> {
   const res = await fetch(`${API_BASE}/api/hot/dongfangcaifu`)
