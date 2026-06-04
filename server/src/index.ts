@@ -28,6 +28,7 @@ const DONG_FANG_CAI_FU_DATA: PlatformHotResponse = {
   sourceName: '东方财富',
   listType: 'stock',
   listTypeName: '热门股票',
+  updatedAt: new Date().toISOString(),
   items: [
     { rank: 1, title: '中国船舶', code: '600150', change: '+7.25%', url: 'https://quote.eastmoney.com/sh600150.html', bullName: '林园' },
     { rank: 2, title: '中国核电', code: '601985', change: '+5.88%', url: 'https://quote.eastmoney.com/sh601985.html' },
@@ -47,6 +48,7 @@ const TONG_HUA_SHUN_DATA: PlatformHotResponse = {
   sourceName: '同花顺',
   listType: 'stock',
   listTypeName: '热门股票',
+  updatedAt: new Date().toISOString(),
   items: [
     { rank: 1, title: '新易盛', code: '300502', change: '+9.12%', heat: '热度 98', url: 'https://stockpage.10jqka.com.cn/300502/', bullName: '陈小群' },
     { rank: 2, title: '天孚通信', code: '300394', change: '+7.45%', heat: '热度 95', url: 'https://stockpage.10jqka.com.cn/300394/' },
@@ -66,6 +68,7 @@ const TE_TE_WANG_DATA: PlatformHotResponse = {
   sourceName: '特特网',
   listType: 'stock',
   listTypeName: '热门股票',
+  updatedAt: new Date().toISOString(),
   items: [
     { rank: 1, title: '万丰奥威', code: '002085', change: '+10.01%', url: 'https://www.tetewang.com/stock/002085', bullName: '林园' },
     { rank: 2, title: '低空经济', code: 'BK0987', change: '+7.88%', heat: '题材热度 96', url: 'https://www.tetewang.com/theme/BK0987' },
