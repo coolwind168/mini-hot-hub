@@ -1,0 +1,13 @@
+# Railway 配置文件
+# 文档: https://docs.railway.app/reference/config-as-code
+
+[build]
+builder = "nixpacks"
+buildCommand = "npm ci && npm run build"
+
+[deploy]
+startCommand = "npm run start"
+healthcheckPath = "/api/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 3
